@@ -1,0 +1,104 @@
+1. Introduction & Setup
+
+=> https://github.com/tomphill/gatsby-shopify-course
+=> Build a hybrid dynamic and static ecommerce app using Gatbsy to generate that site
+=> Shopify handles all the products and orders
+=> Gatbsy is more than a static site generator, we can also do dynamic things
+=> Gatbsy uses React & GraphQL
+=> we will query Shopify data using GraphQL
+=> Shareable URL's -> share the page with by the variant
+=> When the app first renders -> we have a static page in plain HTML & CSS
+and then React gets initialized(for dynamic things)
+=> static site advantage: gets loaded very fast in the browser because there is 
+no additional rendering
+
+GATSBY_SHOP_NAME=gatsby-commerce
+GATSBY_ACCESS_TOKEN=0619e05f56edfbb56f9cff274966d22e
+
+Setup Gatsby project
+=> install Gatsby CLI -> npm install -g gatsby-cli 
+=> gatsby -v
+=> gatsby new gatsby-shopify-commerce https://github.com/tomphill/gatsby-shopify-starter
+=> gatsby develop -> localhost:8000
+=> gatsby-source-shopify plugin
+
+Setup Shopify & import products
+=> we don't need shopify frontend (we use Gatsby), only the shopify backend
+=> Settings -> Sales channels -> Remove online store
+=> Settings -> Plan and permissions -> Compare plans -> Shopify Lite (because we turned off Shopify default frontend) - 9$
+=> Context -> global state management store
+=> gatsby-node.js -> generate static files and creating unique pages based on our products
+
+Add products to Dashboard
+=> Apps -> Visit the Shopify App Store -> Search 'oberlo' -> Oberlo ‑ Dropshipping App -> Add app
+=> Products -> Import -> drag & drop .csv file
+
+
+Disable Shopify real-life payments + Enable Bogus payments for testing
+=> Settings -> Payments -> Choose third party providers -> search bogus -> Activate for testing Bogus Payments
+
+Collections in Shopify
+=> collections are categories for our products
+=> Create collection 
+
+
+Connect Gatsby project to Shopify store and query some data
+=> Set up API keys in Shopify and connect to Gatsby
+=> Apps -> Manage private apps -> Enable private app development -> Create private app
+=> Storefront Access Token -> allow us to connect to Shopify API from Gatsby
+
+Create .env File for environmental variables
+=> GATSBY_SHOP_NAME=gatsby-commerce
+=> GATSBY_ACCESS_TOKEN=0619e05f56edfbb56f9cff274966d22e
+=> these allow us to connect Gatsby to Shopify data
+=> localhost:8000/__graphql
+
+Query Shopify data using GraphQL queries
+
+
+2. Building the product pages
+
+=> query Shopify products & generate pages based on those products
+=> construct graphQL query -> allShopifyProduct
+=> handle-> slug
+=> gatsby-node.js -> generate pages
+=> under the hood Gatsby uses Redux(actions in gatsby-node.js)
+
+Build the product template
+=> src/templates/ProductTemplate/index.js
+=> props.pageContext.shopifyId in the productTemplate component
+
+Styled components
+
+
+
+3. Building image gallery of a product
+
+=> Gatsby Image plugin
+=> Create Image gallery Component
+=> Thumbnail
+=> Fragments
+=> childImageSharp -> plugin for optimize images
+
+
+4. Dynamically query data
+
+=> npm install shopify-buy -> allow us to dinamically query the Shopify API
+=> optional chaining -> variable? -> ES2020
+=> Routing for variants (shareable urls) -> "@reach/router"
+
+
+
+
+11. Deploy live on Netlify
+
+=> create github repo for project
+=> netlify -> gatsby build -> public/ -> env variables
+
+Automatic re-deploy when Shopify content changes
+-> Netlify -> Build & Deploy -> Build Hooks
+-> Shopify -> Notifications -> Webhooks -> Add a webhook
+
+FaunaDB -> noSQL (documents & collections) -> like Atlas or Firebase
+
+Netlify Functions
